@@ -17,7 +17,6 @@ class QrDetector {
   ros::NodeHandle nh_;
   image_transport::ImageTransport it_;
   image_transport::Subscriber image_sub_;
-  image_transport::Publisher string_pub_;
   ros::Publisher str_pub;  
   std_msgs::String str_msg;
   Mat gray;
@@ -26,7 +25,7 @@ public:
   QrDetector()
     : it_(nh_) {
     image_sub_ = it_.subscribe(image_topic, 1, &QrDetector::cameraCallback, this);
-    str_pub = nh_.advertise<std_msgs::String>("/qr_code/message", 1000);
+    str_pub = nh_.advertise<std_msgs::String>("/qr_scanner/data", 1000);
     scanner.set_config(ZBAR_NONE, ZBAR_CFG_ENABLE, 1);
   }
 
@@ -48,7 +47,7 @@ public:
     Image::SymbolIterator symbol = imageZbar.symbol_begin();
     for (; symbol != imageZbar.symbol_end(); ++symbol) {
       std::stringstream ss;
-      ss << symbol->get_data() << endl;
+      ss << symbol->get_data();
       str_msg.data = ss.str();
       str_pub.publish(str_msg);
     }

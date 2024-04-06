@@ -1,0 +1,4 @@
+<launch>
+  <param name="/camera_topic" type="string" value="/image_raw" />
+  <node name="QrDetection" pkg="qr_scanner" type="activate_node" output="screen"/>
+</launch>

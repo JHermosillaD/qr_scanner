@@ -9,6 +9,7 @@ A ROS package to detect QR codes using ZBar and publish strings messages.
 ### Requirements
 - [x] ROS noetic or higher
 - [x] ZBar
+- [x] libzbar-dev package
 ### Installation
 Clone the repository to the workspace source path.
 ```
